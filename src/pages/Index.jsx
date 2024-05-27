@@ -1,7 +1,7 @@
 import { Box, Container, VStack, HStack, Text, Input, Button, Flex, Heading, SimpleGrid, Link, IconButton } from "@chakra-ui/react";
 import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 
-const Index = () => {
+const Index = ({ jobs }) => {
   return (
     <Box>
       {/* Navigation Bar */}
@@ -10,10 +10,10 @@ const Index = () => {
           <HStack spacing={8} justify="space-between">
             <Heading size="md">JobListing</Heading>
             <HStack spacing={4}>
-              <Link href="#">Home</Link>
-              <Link href="#">Jobs</Link>
-              <Link href="#">Post a Job</Link>
-              <Link href="#">Contact</Link>
+              <Link href="/">Home</Link>
+              <Link href="/jobs">Jobs</Link>
+              <Link href="/post-job">Post a Job</Link>
+              <Link href="/contact">Contact</Link>
             </HStack>
           </HStack>
         </Container>
@@ -37,19 +37,14 @@ const Index = () => {
       <Container maxW="container.lg" py={10}>
         <Heading size="lg" mb={6}>Job Listings</Heading>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
-          <Box p={5} shadow="md" borderWidth="1px">
-            <Heading fontSize="xl">Software Engineer</Heading>
-            <Text mt={4}>Company: Tech Corp</Text>
-            <Text>Location: New York, NY</Text>
-            <Text mt={4}>Brief description of the job listing goes here...</Text>
-          </Box>
-          <Box p={5} shadow="md" borderWidth="1px">
-            <Heading fontSize="xl">Product Manager</Heading>
-            <Text mt={4}>Company: Innovate Ltd</Text>
-            <Text>Location: San Francisco, CA</Text>
-            <Text mt={4}>Brief description of the job listing goes here...</Text>
-          </Box>
-          {/* Add more job listings as needed */}
+          {jobs.map((job, index) => (
+            <Box key={index} p={5} shadow="md" borderWidth="1px">
+              <Heading fontSize="xl">{job.jobTitle}</Heading>
+              <Text mt={4}>Company: {job.companyName}</Text>
+              <Text>Location: {job.location}</Text>
+              <Text mt={4}>{job.jobDescription}</Text>
+            </Box>
+          ))}
         </SimpleGrid>
       </Container>
 
